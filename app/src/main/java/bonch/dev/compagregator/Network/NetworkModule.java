@@ -9,6 +9,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkModule {
 
+   /* ObjectMapper mapper = new ObjectMapper();
+        mapper.setPropertyNamingStrategy(new PropertyNamingStrategy
+                .PascalCaseStrategy());*/
+
     private final String URL = "http://dropiteasy.ru/api/";
 
     private OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder()
@@ -24,5 +28,5 @@ public class NetworkModule {
             .client(okHttpClient)
             .build();
 
-    public TagsService tagsService = retrofit.create(TagsService.class);
+    public CompaniesService tagsService = retrofit.create(CompaniesService.class);
 }

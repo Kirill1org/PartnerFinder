@@ -1,15 +1,35 @@
 package bonch.dev.compagregator.DAO;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Company {
+    public int getID() {
+        return ID;
+    }
 
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    private int ID;
     private String name;
     private String comment;
     private String email;
     private Boolean hidden;
     private List<Tag> tags;
     private List<Tag> need_tags;
+
+    public Company(int ID, String name, String comment, String email, Boolean hidden, List<Tag> tags, List<Tag> need_tags) {
+        this.ID = ID;
+        this.name = name;
+        this.comment = comment;
+        this.email = email;
+        this.hidden = hidden;
+        this.tags = tags;
+        this.need_tags = need_tags;
+    }
 
     public Company(String compName, String compComment, String compEmail, Boolean isCompanyHidden, List<Tag> companyTags, List<Tag> findTags) {
         this.name = compName;
@@ -56,7 +76,7 @@ public class Company {
         return tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(ArrayList<Tag> tags) {
         this.tags = tags;
     }
 
@@ -64,7 +84,7 @@ public class Company {
         return need_tags;
     }
 
-    public void setNeed_tags(List<Tag> need_tags) {
+    public void setNeed_tags(ArrayList<Tag> need_tags) {
         this.need_tags = need_tags;
     }
 }

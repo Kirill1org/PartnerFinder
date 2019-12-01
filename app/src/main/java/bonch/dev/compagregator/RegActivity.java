@@ -1,6 +1,8 @@
 package bonch.dev.compagregator;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -13,9 +15,13 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
+import bonch.dev.compagregator.DAO.Company;
 import bonch.dev.compagregator.DAO.Tag;
 
 import bonch.dev.compagregator.Presenter.TagPresenter;
@@ -92,14 +98,13 @@ public class RegActivity extends MvpAppCompatActivity implements ITagView {
             @Override
             public void onClick(View view) {
 
-                /*Company company = new Company(companyName.getText().toString(), companyAddition.getText().toString(),
+                Company company = new Company(companyName.getText().toString(), companyAddition.getText().toString(),
                         companyEmail.getText().toString(), checkCompanyHidden.isChecked(), mTagPresenter.getResultCompanyTag(), mTagPresenter.getResultFindTag());
+                Gson gson = new Gson();
 
-                api.postCompany(company)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(resopnseBody -> showResponseCode(resopnseBody), Throwable -> showThrowableMessage(Throwable));
-*/
+                mTagPresenter.regCompany(company);
+
+
 
             }
         });
@@ -136,7 +141,7 @@ public class RegActivity extends MvpAppCompatActivity implements ITagView {
 
 
     private void init() {
-        companyTags = findViewById(R.id.companyTagGroup);
+        companyTags = findViewById(R.id.companySearchTagGroup);
         findTags = findViewById(R.id.findTagGroup);
         regBtn = findViewById(R.id.reg_btn);
 
@@ -168,11 +173,16 @@ public class RegActivity extends MvpAppCompatActivity implements ITagView {
     @Override
     public void showErrorMessage(Throwable e) {
         Toast.makeText(this, e.getLocalizedMessage().toString(), Toast.LENGTH_LONG).show();
+        Log.e("Error",e.toString());
 
     }
 
     @Override
-    public void startSearchActivity(List<Tag> resultFindListTag) {
+    public void startSearchActivity(int companyID) {
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("companyID",companyID);
+        startActivity(intent);
 
     }
 }

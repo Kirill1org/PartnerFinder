@@ -1,5 +1,6 @@
 package bonch.dev.compagregator.Presenter;
 
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
@@ -9,7 +10,7 @@ import java.util.List;
 import bonch.dev.compagregator.DAO.Company;
 import bonch.dev.compagregator.DAO.Tag;
 import bonch.dev.compagregator.Network.NetworkModule;
-import bonch.dev.compagregator.Network.TagsService;
+import bonch.dev.compagregator.Network.CompaniesService;
 import bonch.dev.compagregator.ITagView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -17,12 +18,12 @@ import io.reactivex.schedulers.Schedulers;
 @InjectViewState
 public class TagPresenter extends MvpPresenter<ITagView> implements ITagPresenter {
 
-    private TagsService api;
+    private CompaniesService api;
 
     private ArrayList<String> titleListTags;
     private ArrayList<Tag> objectListTags;
-    private ArrayList<Tag> resultCompanyListTags;
-    private ArrayList<Tag> resultFindListTags;
+    private List<Tag> resultCompanyListTags;
+    private List<Tag> resultFindListTags;
 
     private void init() {
 
@@ -80,17 +81,38 @@ public class TagPresenter extends MvpPresenter<ITagView> implements ITagPresente
 
     @Override
     public void deleteCompanyTag(String tagTitle) {
+       int deleteTagID=-1;
 
+        for (int i=0; i<resultCompanyListTags.size(); i++){
+            if (resultCompanyListTags.get(i).getName().equals(tagTitle)) deleteTagID=i;
+        }
+        resultCompanyListTags.remove(deleteTagID);
     }
 
     @Override
     public void deleteFindTag(String tagTitle) {
+        int deleteTagID=-1;
+
+        for (int i=0; i<resultFindListTags.size(); i++){
+            if (resultFindListTags.get(i).getName().equals(tagTitle)) deleteTagID=i;
+        }
+        resultFindListTags.remove(deleteTagID);
 
     }
 
     @Override
     public void regCompany(Company company) {
 
+            api.postCompany(company)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(resopnseBody -> startMainActivity(resopnseBody.getID()), Throwable -> getViewState().showErrorMessage(Throwable));
+
+
+    }
+
+    private void startMainActivity(int companyID) {
+        getViewState().startSearchActivity(companyID);
     }
 
 

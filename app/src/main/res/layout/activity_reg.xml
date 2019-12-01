@@ -24,10 +24,10 @@
 
     <ScrollView
         android:id="@+id/horizontalScrollView"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_width="296dp"
+        android:layout_height="69dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/companyName">
 
         <com.google.android.material.chip.ChipGroup
-            android:id="@+id/companyTagGroup"
+            android:id="@+id/companySearchTagGroup"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -44,7 +44,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingAddCompanyTagBtn"
-        android:layout_width="53dp"
+        android:layout_width="56dp"
         android:layout_height="61dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
@@ -87,17 +87,17 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:text="Видимость"
+        android:text="Скрытый"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/companyEmail" />
 
     <ScrollView
         android:id="@+id/findScrollView"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_width="272dp"
+        android:layout_height="73dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="56dp"
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -126,17 +126,47 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="16dp" />
+        app:layout_constraintGuide_begin="55dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingAddFindTagBtn"
-        android:layout_width="53dp"
-        android:layout_height="61dp"
+        android:layout_width="57dp"
+        android:layout_height="58dp"
         android:clickable="true"
 
         app:layout_constraintBottom_toBottomOf="@+id/findScrollView"
         app:layout_constraintEnd_toEndOf="@+id/findScrollView"
         app:layout_constraintTop_toTopOf="@+id/findScrollView"
         app:srcCompat="@android:drawable/ic_input_add" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:text="Регистрация"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Род деятельности"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
+        app:layout_constraintEnd_toEndOf="@+id/horizontalScrollView"
+        app:layout_constraintStart_toStartOf="@+id/horizontalScrollView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Поиск партнера"
+        app:layout_constraintBottom_toTopOf="@+id/findScrollView"
+        app:layout_constraintEnd_toEndOf="@+id/findScrollView"
+        app:layout_constraintStart_toStartOf="@+id/findScrollView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
